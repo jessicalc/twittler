@@ -10,13 +10,14 @@
     %script{:src => "assets/js/livestamp.js"}
     %script{:src => "assets/js/data_generator.js"}
     :javascript
+      var visitor = "crocophant";
       $(document).ready(function(){
         var $tweetContainer = $('#tweet-container');
         $tweetContainer.html('');
-
         var index = streams.home.length - 1;
         var latestTweetIndex = 0;
 
+        $('.tweet-form').find('label').text('Hello, ' + visitor + '! What\'s up?');
 
         while(index >= 0){
           var tweet = streams.home[index];
@@ -56,7 +57,7 @@
           var currentAuthor = $(this).closest('.tweet').data('author');
           console.log(currentAuthor);
           $('.tweet').not("." + currentAuthor).slideUp();
-          $('.twitter-stream').removeClass('all-tweets');
+          $('.twitter-stream').removeClass('all-tweets').addClass(currentAuthor);
           $('.viewing-label').html('<p>Tweets by ' + currentAuthor + '.</p><p><a href="#" class="all-tweets-button btn btn-info">&laquo; Back to All Tweets</a><p>');
           $('.load-more').hide();
         })
@@ -67,6 +68,27 @@
           $(this).closest('.viewing-label').html('<p>All Tweets</p>')
         });
 
+        $('.tweet-form').on('click', '.submit-tweet', function(e) {
+          var entry = $(this).closest('.tweet-form').find('.tweet-input').val();
+          if (entry.length !== 0) {
+            var jessTweet = {
+              message: entry,
+              user: visitor,
+              created_at: new Date()
+            };
+            streams.home.push(jessTweet);
+            $(this).closest('.tweet-form').find('.tweet-input').val('');
+          } else {
+            $(this).closest('.tweet-form').find('p.error').remove();
+            $(this).closest('.tweet-form').find('.tweet-input').after('<p class="error">You didn\'t write anything!</p>');
+            e.stopPropagation();
+          }
+        });
+
+        $('.tweet-input').click(function() {
+          console.log("I'll remove it");
+          $('.tweet-form').find('p.error').remove();
+        })
 
       });
 
@@ -82,6 +104,13 @@
             .viewing-label
               %p All Tweets
         .col-sm-7
+          .tweet-form
+            %form
+              .form-group
+                %label
+                %textarea{:class => 'form-control tweet-input', :rows => '3'}
+              %button{:type => 'submit', :class => 'submit-tweet btn btn-default'}
+                Post
           .twitter-stream.all-tweets
             .load-more
             #tweet-container

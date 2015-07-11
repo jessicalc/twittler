@@ -38,3 +38,22 @@ a {
   cursor: pointer; }
   .load-more:hover {
     background: #eee; }
+
+.tweet-form {
+  margin-bottom: 20px; }
+
+.tweet.crocophant {
+  background: #fcfcee; }
+
+.form-group {
+  position: relative; }
+
+.error {
+  font-size: 0.85em;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  bottom: -40px; }
+
+.crocophant .tweet.crocophant {
+  background: #fff; }
