@@ -37,7 +37,7 @@
             $(document).attr('title', "(" + unread + ") Twittler");
           };
       
-        }, 10000);
+        }, 6000);
       
       
         $('.twitter-stream').on('click', '.load-more', function() {
@@ -65,7 +65,6 @@
         $('.current-view').on('click', '.all-tweets-button', function() {
           $('.twitter-stream').addClass('all-tweets');
           $('.tweet').slideDown();
-          $('.load-more').show();
           $(this).closest('.viewing-label').html('<p>All Tweets</p>')
         });
       
