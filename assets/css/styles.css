@@ -1,0 +1,40 @@
+body {
+  background: #fafafa;
+  padding: 20px 0; }
+
+a {
+  text-decoration: none; }
+
+.twitter-stream {
+  background: #fff;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-radius: 5px; }
+
+.tweet {
+  border-bottom: 1px solid #ddd;
+  padding: 10px; }
+  .tweet:hover {
+    background: #f6f8fa; }
+
+.timestamp {
+  color: #ccc;
+  font-size: 0.9em; }
+
+.tweet-author {
+  font-weight: bold; }
+
+.button-container {
+  text-align: right;
+  margin: 20px 0; }
+
+.load-more {
+  display: block;
+  display: none;
+  background: #e4e5e5;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer; }
+  .load-more:hover {
+    background: #eee; }
