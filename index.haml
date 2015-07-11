@@ -27,18 +27,16 @@
           latestTweetIndex += 1;
         }
 
-        if ($('.twitter-stream').hasClass('all-tweets')) {
-          setInterval(function() {
-            var unread = streams.home.length - latestTweetIndex;
+        setInterval(function() {
+          var unread = streams.home.length - latestTweetIndex;
 
-            if (unread > 0) {
-              $('.load-more').text('View ' + unread + ' new tweets').fadeIn();
-              console.log(streams.home.length);
-              $(document).attr('title', "(" + unread + ") Twittler");
-            };
+          if ((unread > 0) && ($('.twitter-stream').hasClass('all-tweets'))) {
+            $('.load-more').text('View ' + unread + ' new tweets').fadeIn();
+            console.log(streams.home.length);
+            $(document).attr('title', "(" + unread + ") Twittler");
+          };
 
-          }, 10000);
-        };
+        }, 10000);
 
 
         $('.twitter-stream').on('click', '.load-more', function() {
@@ -53,7 +51,24 @@
         })
 
 
-        
+        $('#tweet-container').on('click', '.tweet-author', function(e) {
+          e.preventDefault();
+          var currentAuthor = $(this).closest('.tweet').data('author');
+          console.log(currentAuthor);
+          $('.tweet').not("." + currentAuthor).slideUp();
+          $('.twitter-stream').removeClass('all-tweets');
+          $('.viewing-label').html('<p>Tweets by ' + currentAuthor + '.</p><p><a href="#" class="all-tweets-button btn btn-info">&laquo; Back to All Tweets</a><p>');
+          $('.load-more').hide();
+        })
+
+        $('.current-view').on('click', '.all-tweets-button', function() {
+          $('.twitter-stream').addClass('all-tweets');
+          $('.tweet').slideDown();
+          $('.load-more').show();
+          $(this).closest('.viewing-label').html('<p>All Tweets</p>')
+        });
+
+
       });
 
   %body
@@ -66,7 +81,7 @@
           .current-view
             %h3 You're viewing:
             .viewing-label
-              All Tweets
+              %p All Tweets
         .col-sm-7
           .twitter-stream.all-tweets
             .load-more
