@@ -109,6 +109,15 @@
 		"useDoubleQuotes": 0,
 		"useUnixNewlines": 0
 		},
+	"\/index.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/index.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/min\/data_generator-min.js": {
 		"fileType": 64,
 		"ignore": 1,

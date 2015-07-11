@@ -70,7 +70,7 @@
         });
       
         $('.tweet-form').on('click', '.submit-tweet', function(e) {
-          // e.preventDefault();
+          e.preventDefault();
           var entry = $(this).closest('.tweet-form').find('.tweet-input').val();
           if (entry.length !== 0) {
             var jessTweet = {
