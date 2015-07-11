@@ -57,7 +57,7 @@
           var currentAuthor = $(this).closest('.tweet').data('author');
           console.log(currentAuthor);
           $('.tweet').not("." + currentAuthor).slideUp();
-          $('.twitter-stream').removeClass('all-tweets').addClass(currentAuthor);
+          $('.twitter-stream').removeClass('all-tweets');
           $('.viewing-label').html('<p>Tweets by ' + currentAuthor + '.</p><p><a href="#" class="all-tweets-button btn btn-info">&laquo; Back to All Tweets</a><p>');
           $('.load-more').hide();
         })
@@ -69,6 +69,7 @@
         });
 
         $('.tweet-form').on('click', '.submit-tweet', function(e) {
+          // e.preventDefault();
           var entry = $(this).closest('.tweet-form').find('.tweet-input').val();
           if (entry.length !== 0) {
             var jessTweet = {
@@ -80,7 +81,7 @@
             $(this).closest('.tweet-form').find('.tweet-input').val('');
           } else {
             $(this).closest('.tweet-form').find('p.error').remove();
-            $(this).closest('.tweet-form').find('.tweet-input').after('<p class="error">You didn\'t write anything!</p>');
+            $(this).closest('.tweet-form').find('.tweet-input').after('<p class="error">You didn\'t write anything</p>');
             e.stopPropagation();
           }
         });
