@@ -18,40 +18,39 @@
         var index = streams.home.length - 1;
         var latestTweetIndex = 0;
       
+        var createTweet = function(n) {
+          console.log("the index of this tweet is " + n);
+          var tweet = streams.home[n];
+          var $tweet = $('<div class="tweet ' + tweet.user + '"data-author="' + tweet.user + '"></div>');
+          $tweet.html('<a href="#" class="tweet-author" data-author="' + tweet.user + '"> @' + tweet.user + '</a>  &#8226; <span class="timestamp" data-livestamp="' + tweet.created_at + '"></span><div class="tweet-message">' + tweet.message + '</div>');
+          return $tweet;
+        };
+      
         $('.tweet-form').find('label').text('Hello, ' + visitor + '! What\'s up?');
       
         while(index >= 0){
-          var tweet = streams.home[index];
-              var $tweet = $('<div class="tweet ' + tweet.user + '"data-author="' + tweet.user + '"></div>');
-          $tweet.html('<a href="#" class="tweet-author" data-author="' + tweet.user + '"> @' + tweet.user + '</a>  &#8226; <span class="timestamp" data-livestamp="' + tweet.created_at + '"></span><div class="tweet-message">' + tweet.message + '</div>');
-          $tweet.appendTo($tweetContainer);
+          createTweet(index).appendTo($tweetContainer);
           index -= 1;
           latestTweetIndex += 1;
         }
       
         setInterval(function() {
           var unread = streams.home.length - latestTweetIndex;
-      
           if ((unread > 0) && ($('.twitter-stream').hasClass('all-tweets'))) {
             $('.load-more').text('View ' + unread + ' new tweets').fadeIn();
             console.log(streams.home.length);
             $(document).attr('title', "(" + unread + ") Twittler");
           };
       
-        }, 6000);
-      
+        }, 1000);
       
         $('.twitter-stream').on('click', '.load-more', function() {
             for (var index = latestTweetIndex; index < streams.home.length; index++) {
-              var tweet = streams.home[index];
-              var $tweet = $('<div class="tweet ' + tweet.user + '"data-author="' + tweet.user + '"></div>');
-              $tweet.html('<a href="#" class="tweet-author"> @' + tweet.user + '</a>  &#8226; <span class="timestamp" data-livestamp="' + tweet.created_at + '"></span><div class="tweet-message">' + tweet.message + '</div>');
-              $tweet.prependTo($tweetContainer);
+              createTweet(index).prependTo($tweetContainer);
               latestTweetIndex = streams.home.length;
             }
             $(this).slideUp();
         })
-      
       
         $('#tweet-container').on('click', '.tweet-author', function(e) {
           e.preventDefault();
